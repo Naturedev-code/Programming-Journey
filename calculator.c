@@ -19,15 +19,15 @@ int main()
     }
     else if (o == 2)
     {
-      printf("The sum of respective numbers is: %lf\n", x / y); // Division
+      printf("The divison of respective numbers is: %lf\n", x / y); // Division
     }
     else if (o == 3)
     {
-      printf("The sum of respective numbers is: %lf\n", x - y); // Subraction
+      printf("The difference of respective numbers is: %lf\n", x - y); // Subraction
     }
     else if (o == 4)
     {
-      printf("The sum of respective numbers is: %lf\n", x + y); // Addition
+      printf("The addition of respective numbers is: %lf\n", x + y); // Addition
     }
     else
     {
