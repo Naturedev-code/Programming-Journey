@@ -1,19 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
-int main()
+#include <time.h>
+
+int main(void)
 {
-  int numgen, user;
-  numgen = rand() % 200 + 1; // Generates a random number from 1-200;
-  printf("Choose a number from 1-200: ");
-  scanf("%d", &user);
-  while (user != numgen)
-  { // Implies only when the user entered value is not equal to the generated value;
-    if (user > numgen)
-      printf("Too High! Try again: ");
-    else
-      printf("Too Low! Try agian: ");
-    scanf("%d", &user); // Reads Value given by user ifthe user entered value is not equal to the generated value;
-  }
-  printf("Yes!the number is %d", numgen);
-  return 0;
+    const int maximum = 200;
+    int secret;
+    int guess;
+    int attempts = 0;
+
+    srand((unsigned int)time(NULL));
+    secret = rand() % maximum + 1;
+    printf("Guess the number (1-%d).\n", maximum);
+
+    do
+    {
+        printf("Enter your guess: ");
+        if (scanf("%d", &guess) != 1 || guess < 1 || guess > maximum)
+        {
+            printf("Please enter a number from 1 to %d.\n", maximum);
+            return 1;
+        }
+
+        attempts++;
+        if (guess < secret)
+        {
+            printf("Too low.\n");
+        }
+        else if (guess > secret)
+        {
+            printf("Too high.\n");
+        }
+    } while (guess != secret);
+
+    printf("Correct! You found %d in %d attempt%s.\n",
+           secret, attempts, attempts == 1 ? "" : "s");
+    return 0;
 }

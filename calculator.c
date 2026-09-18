@@ -1,43 +1,58 @@
 #include <stdio.h>
-#include <string.h>
-int main()
+
+static int read_double(const char *prompt, double *value)
 {
-  int  o;
-  char V[10];
-  double x,y; 
-  
-  do
-  {
-    printf("Enter two numbers: ");
-  scanf("%lf%lf", &x, &y);
+    printf("%s", prompt);
+    return scanf("%lf", value) == 1;
+}
 
-    printf("Choose Following Operator Multiply=1,Divide=2,Subraction=3,Addition=4: ");
-    scanf("%d", &o);
-    if (o == 1)
-    {
-      printf("The Multiplication of respective numbers is: %lf\n", x * y); // Multiplication
-    }
-    else if (o == 2)
-    {
-      printf("The sum of respective numbers is: %lf\n", x / y); // Division
-    }
-    else if (o == 3)
-    {
-      printf("The sum of respective numbers is: %lf\n", x - y); // Subraction
-    }
-    else if (o == 4)
-    {
-      printf("The sum of respective numbers is: %lf\n", x + y); // Addition
-    }
-    else
-    {
-      printf("Invalid\n");
-    }
-    printf("Do you want to calcualte again? Y/N: ");
-    scanf("%s", V);
-  }
+int main(void)
+{
+    double first;
+    double second;
+    double result;
+    char operation;
 
- while (strcmp(V, "Y") == 0 || strcmp(V, "y") == 0);
+    printf("Simple Calculator\n");
+    printf("=================\n");
+    if (!read_double("Enter the first number: ", &first) ||
+        !read_double("Enter the second number: ", &second))
+    {
+        printf("Invalid number entered.\n");
+        return 1;
+    }
 
-return 0;
+    printf("Choose an operation (+, -, *, /): ");
+    if (scanf(" %c", &operation) != 1)
+    {
+        printf("Invalid operation.\n");
+        return 1;
+    }
+
+    switch (operation)
+    {
+    case '+':
+        result = first + second;
+        break;
+    case '-':
+        result = first - second;
+        break;
+    case '*':
+        result = first * second;
+        break;
+    case '/':
+        if (second == 0.0)
+        {
+            printf("Division by zero is not allowed.\n");
+            return 1;
+        }
+        result = first / second;
+        break;
+    default:
+        printf("Unknown operation.\n");
+        return 1;
+    }
+
+    printf("Result: %.2f\n", result);
+    return 0;
 }

@@ -1,31 +1,32 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <string.h>
 
-int main(){
-    int n, originalNum, reversedNum = 0, remainder, check;
-    
-    do{
-        printf("Enter the number: ");
-        scanf("%d", &n);
-        
-        originalNum = n;
-        
-  
-        while(n > 0){
-            remainder = n % 10;
-            reversedNum = reversedNum * 10 + remainder;
-            n = n / 10;
+int main(void)
+{
+    char text[101];
+    size_t length;
+    int is_palindrome = 1;
+
+    printf("Enter a word or phrase: ");
+    if (fgets(text, sizeof(text), stdin) == NULL)
+    {
+        printf("Unable to read input.\n");
+        return 1;
+    }
+
+    text[strcspn(text, "\n")] = '\0';
+    length = strlen(text);
+
+    for (size_t left = 0; left < length / 2; left++)
+    {
+        if (text[left] != text[length - left - 1])
+        {
+            is_palindrome = 0;
+            break;
         }
-      
-        if(originalNum == reversedNum){
-            printf("%d is a PALINDROME\n", originalNum);
-        } else {
-            printf("%d is NOT a palindrome\n", originalNum);
-        }
-        
-        reversedNum = 0;  
-        printf("Do you want to check palindrome again? (Y=1, N=0): ");
-        scanf("%d", &check);
-    }while(check == 1);
-    
+    }
+
+    printf("\"%s\" is %s palindrome.\n",
+           text, is_palindrome ? "a" : "not a");
     return 0;
 }

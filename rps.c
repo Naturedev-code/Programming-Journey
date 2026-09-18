@@ -1,40 +1,66 @@
 #include <stdio.h>
-#include <stdlib.h> // in order to use rand()
-#include <time.h>   //in order to use srand()
-int main()
+#include <stdlib.h>
+#include <time.h>
+
+static const char *choice_name(int choice)
 {
-    int choice, r, wins = 0, loss = 0,draw=0;
-    srand(time(NULL)); //generates randomness
-    do
+    const char *names[] = {"", "Rock", "Paper", "Scissors"};
+    return names[choice];
+}
+
+int main(void)
+{
+    int choice;
+    int computer;
+    int wins = 0;
+    int losses = 0;
+    int draws = 0;
+
+    srand((unsigned int)time(NULL));
+    printf("Rock, Paper, Scissors\n");
+
+    while (1)
     {
-
-        printf("Choose Rock:1 , Paper:2 , scissor:3 ");
-        scanf("%d", &choice);
-
-        r = rand() % 3 + 1; // Generates number from 1-3;
-        if (choice == r)
+        printf("\n1. Rock  2. Paper  3. Scissors  0. Quit\nChoice: ");
+        if (scanf("%d", &choice) != 1)
         {
-            printf("Draw\n");
-            draw++;
+            printf("Invalid input.\n");
+            return 1;
         }
-        else if (choice == 1 && r == 2 || choice == 2 && r == 3 || choice == 3 && r == 1)
+        if (choice == 0)
         {
-            printf("You Lose \n");
-            loss++;
+            break;
+        }
+        if (choice < 1 || choice > 3)
+        {
+            printf("Choose 0, 1, 2, or 3.\n");
+            continue;
         }
 
-        else
+        computer = rand() % 3 + 1;
+        printf("You chose %s; computer chose %s.\n",
+               choice_name(choice), choice_name(computer));
+
+        if (choice == computer)
         {
-            printf("You win \n");
+            printf("Draw.\n");
+            draws++;
+        }
+        else if ((choice == 1 && computer == 3) ||
+                 (choice == 2 && computer == 1) ||
+                 (choice == 3 && computer == 2))
+        {
+            printf("You win!\n");
             wins++;
         }
-        printf("Do you want to play again?  Y=1/No=2\n");
-        scanf("%d", &choice);
+        else
+        {
+            printf("You lose.\n");
+            losses++;
+        }
+    }
 
-    } while (choice == 1);
-    printf("\n -->FINAL SCORE <-- \n");
-    printf("The total win is %d\n", wins);
-    printf("The total loss is %d\n", loss);
-     printf("The total draw is %d\n", draw);
+    printf("\nFinal score - Wins: %d, Losses: %d, Draws: %d\n",
+           wins, losses, draws);
     return 0;
 }

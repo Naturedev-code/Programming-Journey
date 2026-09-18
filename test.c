@@ -1,18 +1,40 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(void)
 {
-    int first_number;
-    int second_number;
+    char text[100];
+    size_t length;
 
-    printf("Enter two numbers: ");
-    if (scanf("%d %d", &first_number, &second_number) != 2)
+    printf("Enter a word to sort alphabetically: ");
+    if (fgets(text, sizeof(text), stdin) == NULL)
     {
-        printf("Please enter valid integers.\n");
+        printf("Unable to read input.\n");
         return 1;
     }
 
-    printf("The sum is %d.\n", first_number + second_number);
+    text[strcspn(text, "\n")] = '\0';
+    length = strlen(text);
 
+    for (size_t pass = 0; pass + 1 < length; pass++)
+    {
+        int changed = 0;
+        for (size_t index = 0; index + 1 < length - pass; index++)
+        {
+            if (text[index] > text[index + 1])
+            {
+                char temporary = text[index];
+                text[index] = text[index + 1];
+                text[index + 1] = temporary;
+                changed = 1;
+            }
+        }
+        if (!changed)
+        {
+            break;
+        }
+    }
+
+    printf("Sorted text: %s\n", text);
     return 0;
 }

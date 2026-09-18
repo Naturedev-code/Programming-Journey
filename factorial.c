@@ -1,21 +1,22 @@
 #include <stdio.h>
-int main()
+
+int main(void)
 {
+    unsigned int number;
+    unsigned long long factorial = 1;
 
-    int n, i, check;
-    do
+    printf("Enter a non-negative integer (0-20): ");
+    if (scanf("%u", &number) != 1 || number > 20)
     {
-        int fact = 1;
+        printf("Please enter a whole number from 0 to 20.\n");
+        return 1;
+    }
 
-        printf("Enter the number: ");
-        scanf("%d", &n);
-        for (i = 1; i <= n; i++)
-        {
-            fact = fact * i;
-        }
-        printf("The factorial of %d is %d\n", n, fact);
-        printf("Do you want to find palindrome again (Y=1,n=0)\n");
-        scanf("%d", &check);
-    } while (check == 1);
+    for (unsigned int value = 2; value <= number; value++)
+    {
+        factorial *= value;
+    }
+
+    printf("%u! = %llu\n", number, factorial);
     return 0;
 }
