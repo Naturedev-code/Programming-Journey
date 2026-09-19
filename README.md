@@ -19,6 +19,7 @@ pointer arithmetic.
 | `stm.c` | Student marks and grade summary |
 | `pointer_array_stats.c` | Uses pointers and dynamic memory for array statistics |
 | `file_handling.c` | Writes a message to a file and reads it back |
+| `tic_tac_toe.c` | Runs a two-player console Tic-tac-toe game |
 
 ## Build
 
