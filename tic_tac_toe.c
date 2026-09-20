@@ -85,10 +85,15 @@ static int read_move(char board[BOARD_SIZE][BOARD_SIZE], char player)
     int row;
     int column;
 
-    printf("Player %c, choose a position (1-9): ", player);
+    printf("Player %c, choose a position (1-9) or q to quit: ", player);
     if (fgets(input, sizeof(input), stdin) == NULL)
     {
         return -1;
+    }
+
+    if (input[0] == 'q' || input[0] == 'Q')
+    {
+        return -2;
     }
 
     if (sscanf(input, "%d", &position) != 1 || position < 1 || position > 9)
@@ -127,6 +132,11 @@ int main(void)
         {
             printf("\nInput ended. Game over.\n");
             return 1;
+        }
+        if (position == -2)
+        {
+            printf("\nThanks for playing!\n");
+            return 0;
         }
         if (position == 0)
         {
