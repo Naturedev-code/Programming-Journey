@@ -78,6 +78,66 @@ static int board_is_full(char board[BOARD_SIZE][BOARD_SIZE])
     return 1;
 }
 
+static int find_move(char board[BOARD_SIZE][BOARD_SIZE], char player)
+{
+    int position;
+    int row;
+    int column;
+
+    for (position = 1; position <= 9; position++)
+    {
+        row = (position - 1) / BOARD_SIZE;
+        column = (position - 1) % BOARD_SIZE;
+        if (board[row][column] >= '1' && board[row][column] <= '9')
+        {
+            board[row][column] = player;
+            if (has_winner(board, player))
+            {
+                board[row][column] = (char)('0' + position);
+                return position;
+            }
+            board[row][column] = (char)('0' + position);
+        }
+    }
+
+    return 0;
+}
+
+static int choose_computer_move(char board[BOARD_SIZE][BOARD_SIZE])
+{
+    int position;
+    int row;
+    int column;
+    const int preferred_positions[] = {5, 1, 3, 7, 9, 2, 4, 6, 8};
+
+    position = find_move(board, 'X');
+    if (position != 0)
+    {
+        return position;
+    }
+
+    position = find_move(board, 'O');
+    if (position != 0)
+    {
+        return position;
+    }
+
+    for (position = 0;
+         position < (int)(sizeof(preferred_positions) /
+                          sizeof(preferred_positions[0]));
+         position++)
+    {
+        row = (preferred_positions[position] - 1) / BOARD_SIZE;
+        column = (preferred_positions[position] - 1) % BOARD_SIZE;
+        if (board[row][column] >= '1' && board[row][column] <= '9')
+        {
+            return preferred_positions[position];
+        }
+    }
+
+    return 0;
+}
+
 static int read_move(char board[BOARD_SIZE][BOARD_SIZE], char player)
 {
     char input[100];
@@ -122,12 +182,21 @@ int main(void)
     initialize_board(board);
     printf("Tic-Tac-Toe\n");
     printf("===========\n");
+    printf("You are Player O. The computer is Player X.\n");
     printf("Enter the number of the position where you want to place your mark.\n");
 
     while (1)
     {
         display_board(board);
-        position = read_move(board, player);
+        if (player == 'X')
+        {
+            position = choose_computer_move(board);
+            printf("Computer chooses position %d.\n", position);
+        }
+        else
+        {
+            position = read_move(board, player);
+        }
         if (position == -1)
         {
             printf("\nInput ended. Game over.\n");
