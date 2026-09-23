@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 
 int main(void)
@@ -17,13 +18,30 @@ int main(void)
     text[strcspn(text, "\n")] = '\0';
     length = strlen(text);
 
-    for (size_t left = 0; left < length / 2; left++)
+    size_t left = 0;
+    size_t right = length;
+
+    while (left < right)
     {
-        if (text[left] != text[length - left - 1])
+        while (left < right && !isalnum((unsigned char)text[left]))
+        {
+            left++;
+        }
+        while (left < right && !isalnum((unsigned char)text[right - 1]))
+        {
+            right--;
+        }
+
+        if (left < right &&
+            tolower((unsigned char)text[left]) !=
+                tolower((unsigned char)text[right - 1]))
         {
             is_palindrome = 0;
             break;
         }
+
+        left++;
+        right--;
     }
 
     printf("\"%s\" is %s palindrome.\n",
