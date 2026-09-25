@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <math.h>
 
 static int read_double(const char *prompt, double *value)
 {
     printf("%s", prompt);
-    return scanf("%lf", value) == 1;
+    return scanf("%lf", value) == 1 && isfinite(*value);
 }
 
 int main(void)
@@ -50,6 +51,12 @@ int main(void)
         break;
     default:
         printf("Unknown operation.\n");
+        return 1;
+    }
+
+    if (!isfinite(result))
+    {
+        printf("Result is outside the supported numeric range.\n");
         return 1;
     }
 

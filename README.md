@@ -17,9 +17,9 @@ pointer arithmetic.
 | `sorting.c` | Sorts up to 100 integers |
 | `test.c` | Sorts the characters in a word |
 | `stm.c` | Student marks and grade summary |
-| `pointer_array_stats.c` | Uses pointers and dynamic memory for array statistics |
+| `pointer_array_stats.c` | Uses pointers and dynamic memory for minimum, maximum, average, median, and descending order |
 | `file_handling.c` | Writes a message to a file and reads it back |
-| `tic_tac_toe.c` | Runs a two-player console Tic-tac-toe game |
+| `tic_tac_toe.c` | Plays console Tic-tac-toe against the computer |
 
 ## Build
 
@@ -30,3 +30,15 @@ gcc -std=c11 -Wall -Wextra -Wpedantic filename.c -o program
 ```
 
 Run the resulting executable from your terminal.
+
+## Check the programs
+
+With GCC and Python 3 on your PATH, run:
+
+```text
+python tests/check_programs.py
+```
+
+This compiles all examples with warnings treated as errors in a temporary
+directory, then checks array statistics at integer limits, interrupted marks
+entry, and calculator error handling. Existing executables are left untouched.

@@ -11,21 +11,31 @@ struct Student
     float computer;
 };
 
-static float read_marks(const char *subject)
+static int read_marks(const char *subject, float *marks)
 {
-    float marks;
-
     while (1)
     {
+        int status;
+        int character;
+
         printf("Enter %s marks (0-100): ", subject);
-        if (scanf("%f", &marks) == 1 && marks >= 0.0f && marks <= 100.0f)
+        status = scanf("%f", marks);
+        if (status == EOF)
         {
-            return marks;
+            return 0;
+        }
+        if (status == 1 && *marks >= 0.0f && *marks <= 100.0f)
+        {
+            return 1;
         }
 
         printf("Enter a valid mark between 0 and 100.\n");
-        while (getchar() != '\n')
+        while ((character = getchar()) != '\n' && character != EOF)
         {
+        }
+        if (character == EOF)
+        {
+            return 0;
         }
     }
 }
@@ -88,9 +98,14 @@ int main(void)
             return 1;
         }
 
-        student->science = read_marks("Science");
-        student->mathematics = read_marks("Mathematics");
-        student->computer = read_marks("Computer");
+        if (!read_marks("Science", &student->science) ||
+            !read_marks("Mathematics", &student->mathematics) ||
+            !read_marks("Computer", &student->computer))
+        {
+            printf("Input ended before all marks were entered.\n");
+            free(students);
+            return 1;
+        }
     }
 
     printf("\nStudent Result Summary\n");
