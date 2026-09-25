@@ -13,6 +13,7 @@ pointer arithmetic.
 | `numberguess.c` | Random number guessing game |
 | `rps.c` | Rock, Paper, Scissors game with score tracking |
 | `factorial.c` | Calculates factorials from 0 to 20 |
+| `prime_checker.c` | Checks whether a whole number from 0 to 2147483647 is prime |
 | `palindrome.c` | Checks whether text reads the same backward |
 | `sorting.c` | Sorts up to 100 integers |
 | `test.c` | Sorts the characters in a word |
