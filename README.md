@@ -21,6 +21,7 @@ pointer arithmetic.
 | `pointer_array_stats.c` | Uses pointers and dynamic memory for minimum, maximum, average, median, and descending order |
 | `file_handling.c` | Writes a message to a file and reads it back |
 | `tic_tac_toe.c` | Plays console Tic-tac-toe against the computer |
+| `maze_cartographer.c` | Generates reproducible mazes, hides treasure in the farthest room, and reveals the shortest route |
 
 ## Build
 
@@ -31,6 +32,28 @@ gcc -std=c11 -Wall -Wextra -Wpedantic filename.c -o program
 ```
 
 Run the resulting executable from your terminal.
+
+## Maze Cartographer
+
+Explore a different maze for every seed. The generator uses iterative depth-first
+search to carve a connected maze with exactly one route between any two rooms.
+Breadth-first search places the treasure in a room farthest from the start.
+
+```text
+gcc -std=c11 -Wall -Wextra -Wpedantic maze_cartographer.c -o maze_cartographer
+./maze_cartographer 12 8 42
+./maze_cartographer 12 8 42 --solve
+```
+
+On Windows PowerShell, use `./maze_cartographer.exe`. `S` marks the start,
+`T` marks the treasure, and `--solve` draws the route with dots. Reusing the
+dimensions and seed reproduces the same maze. Dimensions range from 2 to 30
+rooms and seeds from 0 to 4294967295. With no arguments, the program generates
+a 12 by 8 maze using the current time as its seed. No external libraries are needed.
+
+Run `python tests/check_maze.py` to compile in a temporary directory and check
+connectivity, absence of cycles, treasure distance, reproducibility, solution
+paths, and invalid arguments.
 
 ## Check the programs
 
