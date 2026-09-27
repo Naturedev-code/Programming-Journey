@@ -1,0 +1,8 @@
+# C executables and object files
+*.exe
+*.o
+*.obj
+a.out
+
+# Default output from the README build command
+/program
