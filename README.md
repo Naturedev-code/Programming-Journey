@@ -10,6 +10,7 @@ pointer arithmetic.
 | --- | --- |
 | `hello.c` | Prints a first message |
 | `calculator.c` | Performs basic arithmetic safely |
+| `temperature_converter.c` | Converts Celsius, Fahrenheit, and Kelvin with absolute-zero validation |
 | `numberguess.c` | Random number guessing game |
 | `rps.c` | Rock, Paper, Scissors game with score tracking |
 | `factorial.c` | Calculates factorials from 0 to 20 |
@@ -32,6 +33,10 @@ gcc -std=c11 -Wall -Wextra -Wpedantic filename.c -o program
 ```
 
 Run the resulting executable from your terminal.
+
+For `temperature_converter.c`, enter a number followed by `C`, `F`, or `K`
+(case-insensitive). For example, `100 C` prints `100.00 C`, `212.00 F`, and
+`373.15 K`. Invalid input and temperatures below absolute zero are rejected.
 
 ## Maze Cartographer
 
@@ -65,4 +70,5 @@ python tests/check_programs.py
 
 This compiles all examples with warnings treated as errors in a temporary
 directory, then checks array statistics at integer limits, interrupted marks
-entry, and calculator error handling. Existing executables are left untouched.
+entry, calculator error handling, and temperature conversions. Existing
+executables are left untouched.
