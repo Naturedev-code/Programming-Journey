@@ -23,7 +23,7 @@ int main(void)
         return 1;
     }
 
-    printf("Choose an operation (+, -, *, /): ");
+    printf("Choose an operation (+, -, *, /, %%): ");
     if (scanf(" %c", &operation) != 1)
     {
         printf("Invalid operation.\n");
@@ -48,6 +48,14 @@ int main(void)
             return 1;
         }
         result = first / second;
+        break;
+    case '%':
+        if (second == 0.0)
+        {
+            printf("Remainder by zero is not allowed.\n");
+            return 1;
+        }
+        result = fmod(first, second);
         break;
     default:
         printf("Unknown operation.\n");
