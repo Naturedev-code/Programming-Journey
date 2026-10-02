@@ -23,7 +23,7 @@ int main(void)
         return 1;
     }
 
-    printf("Choose an operation (+, -, *, /, %%): ");
+    printf("Choose an operation (+, -, *, /, %%, ^): ");
     if (scanf(" %c", &operation) != 1)
     {
         printf("Invalid operation.\n");
@@ -56,6 +56,9 @@ int main(void)
             return 1;
         }
         result = fmod(first, second);
+        break;
+    case '^':
+        result = pow(first, second);
         break;
     default:
         printf("Unknown operation.\n");
