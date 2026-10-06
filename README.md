@@ -23,6 +23,7 @@ pointer arithmetic.
 | `file_handling.c` | Writes a message to a file and reads it back |
 | `tic_tac_toe.c` | Plays console Tic-tac-toe against the computer |
 | `maze_cartographer.c` | Generates reproducible mazes, hides treasure in the farthest room, and reveals the shortest route |
+| `todo_list.c` | Manages an in-memory command-line to-do list |
 
 ## Build
 
@@ -33,6 +34,9 @@ gcc -std=c11 -Wall -Wextra -Wpedantic filename.c -o program
 ```
 
 Run the resulting executable from your terminal.
+
+For `todo_list.c`, use `add`, `list`, `complete`, `delete`, or `quit` commands.
+Tasks are numbered in the list, and changes last until the program exits.
 
 For `temperature_converter.c`, enter a number followed by `C`, `F`, or `K`
 (case-insensitive). For example, `100 C` prints `100.00 C`, `212.00 F`, and

@@ -49,6 +49,9 @@ CASES = [
     ("calculator", "nan\n", 1, ["Invalid number"]),
     ("calculator", "inf\n", 1, ["Invalid number"]),
     ("calculator", "1e308\n1e308\n*\n", 1, ["outside the supported"]),
+    ("todo_list", "add\nBuy milk\nlist\ncomplete\n1\nlist\ndelete\n1\nlist\nquit\n",
+     0, ["Task added.", "[ ] Buy milk", "Task completed.", "[x] Buy milk",
+         "Task deleted.", "No tasks yet.", "Goodbye."]),
 ]
 
 
