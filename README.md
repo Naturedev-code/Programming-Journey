@@ -24,6 +24,7 @@ pointer arithmetic.
 | `tic_tac_toe.c` | Plays console Tic-tac-toe against the computer |
 | `maze_cartographer.c` | Generates reproducible mazes, hides treasure in the farthest room, and reveals the shortest route |
 | `todo_list.c` | Manages an in-memory command-line to-do list |
+| `text_statistics.c` | Counts characters, words, and lines in entered text |
 
 ## Build
 
