@@ -25,6 +25,7 @@ pointer arithmetic.
 | `maze_cartographer.c` | Generates reproducible mazes, hides treasure in the farthest room, and reveals the shortest route |
 | `todo_list.c` | Manages an in-memory command-line to-do list |
 | `text_statistics.c` | Counts characters, words, and lines in entered text |
+| `caesar_cipher.c` | Encrypts or decrypts text with a Caesar cipher |
 
 ## Build
 
